@@ -1,5 +1,8 @@
 package com.ssimsekler.HelloWorldJava01;
 
+import java.util.ArrayList;
+import java.util.Scanner;
+
 public class Vehicle {
 
 	public String name;
@@ -10,7 +13,10 @@ public class Vehicle {
 	public int currentGear;
 	public int maxSpeed;
 	public int currentSpeed;
-
+	
+	private ArrayList<Car> carList = new ArrayList<Car>();
+	private static Scanner scanner = new Scanner(System.in);
+	
 	public Vehicle(String name, String make, String model, boolean steerable, int gearCount, int maxSpeed) {
 		super();
 		System.out.println("Creating a vehicle instance...");
