@@ -10,6 +10,9 @@ public class MyListItem extends AbsMyListItem {
 	@Override
 	public byte compareTo(AbsMyListItem otherItem) {
 
+		if (otherItem == null) {
+			return -1;
+		}
 		return (byte) Math.signum(this.value.toString().compareTo(otherItem.getValue().toString()));
 
 	}

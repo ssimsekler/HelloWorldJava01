@@ -30,11 +30,13 @@ public class MyList {
 			this.head = newItem;
 		} else {
 			currentItem = this.head;
+
 			do {
-				if (newItem.compareTo(currentItem) == 0) {
+				byte compResult = newItem.compareTo(currentItem);
+				if (compResult == 0) {
 					System.out.println("This item is already in the list");
 					break;
-				} else if (newItem.compareTo(currentItem) < 0) {
+				} else if (compResult < 0) {
 					if (currentItem.previous() != null) {
 						currentItem.previous().setNext(newItem);
 					}
@@ -65,7 +67,7 @@ public class MyList {
 			System.out.println("No item to delete");
 			return;
 		}
-		
+
 		if (delItem.previous() != null) {
 			delItem.previous().setNext(delItem.next());
 		}
@@ -75,21 +77,43 @@ public class MyList {
 				head = delItem.next();
 			}
 		}
+		delItem.setPrevious(null);
+		delItem.setNext(null);
 
 		System.out.println("Item removed: " + delItem.getValue().toString());
 
 	}
 
+	public void removeAll() {
+		if (head == null) {
+			System.out.println("No items in the list!");
+		} else {
+			AbsMyListItem currentItem = head;
+
+			while (head.next() != null) {
+				removeItem(head.next());
+			}
+			
+			head.setPrevious(null);
+			head.setNext(null);
+			this.head = null;
+		}
+	}
+
 	public void printItems() {
 
-		System.out.println("Printing items...");
+		if (head == null) {
+			System.out.println("No items in the list!");
+		} else {
+			System.out.println("Printing items...");
 
-		AbsMyListItem currentItem = head;
+			AbsMyListItem currentItem = head;
 
-		do {
-			System.out.println(currentItem.getValue().toString());
-			currentItem = currentItem.next();
-		} while (currentItem != null);
+			while (currentItem != null) {
+				System.out.println(currentItem.getValue().toString());
+				currentItem = currentItem.next();
+			}
+		}
 	}
 
 }

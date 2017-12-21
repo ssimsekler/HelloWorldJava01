@@ -17,10 +17,15 @@ public class Demo01 {
 
 	private static void init() {
 
-		myListExample = new MyList(new MyListItem(new String("Turkey"), null, null));
+		myListExample = new MyList(null);
 		scanner = new Scanner(System.in);
 
-		String inputString = "UK:Germany:USA:Canada:Austria:UAE:South Korea:Italy:New Zealand:France";
+		addInitialItems();
+
+	}
+
+	private static void addInitialItems() {
+		String inputString = "Turkey:UK:Germany:USA:Canada:Austria:UAE:South Korea:Italy:New Zealand:France";
 
 		String[] inputData = inputString.split(":");
 
@@ -42,10 +47,19 @@ public class Demo01 {
 				myListExample.addItem(new MyListItem(scanner.next(), null, null));
 				break;
 			case "3":
-				myListExample.removeItem(myListExample.getItem(scanner.next()));
+				System.out.println((myListExample.getItem(scanner.next()) == null) ? "Does not exist" : "exists");
 				break;
 			case "4":
-				System.out.println((myListExample.getItem(scanner.next()) == null) ? "Does not exist" : "exists");
+				myListExample.removeItem(myListExample.getItem(scanner.next()));
+				break;
+			case "5":
+				myListExample.removeAll();
+				break;
+			case "6":
+				addInitialItems();
+				break;
+			case "7":
+				init();
 				break;
 			case "9":
 				quit = true;
@@ -58,8 +72,8 @@ public class Demo01 {
 	}
 
 	private static void printOptions() {
-		System.out.println(
-				"1: Print items\n" + "2: Add item\n" + "3: Remove item\n" + "4: Check item exists\n" + "9: Exit");
+		System.out.println("1: Print items\n" + "2: Add item\n" + "3: Check item exists\n" + "4: Remove item\n"
+				+ "5: Remove all items\n" + "6: Add initial items\n" + "7: Initialise\n" + "9: Exit");
 	}
 
 }
