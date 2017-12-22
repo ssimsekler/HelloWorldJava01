@@ -6,13 +6,15 @@ package com.ssimsekler.HelloWorldJava01;
 public class Vehicle {
 
 	public String name;
-	public String make;
+	protected String make;
 	public String model;
 	public boolean steerable;
 	public int gearCount;
 	public int currentGear;
 	public int maxSpeed;
 	public int currentSpeed;
+	
+	public final int finval;
 	
 //	private ArrayList<Car> carList = new ArrayList<Car>();
 //	private static Scanner scanner = new Scanner(System.in);
@@ -29,6 +31,8 @@ public class Vehicle {
 		this.maxSpeed = maxSpeed;
 		this.currentGear = 0;
 		this.currentSpeed = 0;
+		
+		this.finval = 54;
 
 	}
 
@@ -43,7 +47,7 @@ public class Vehicle {
 			this.currentSpeed = this.currentSpeed + speedChange;
 			System.out.println("Vehicle is now speeding at " + this.currentSpeed + "!");
 		}
-		     
+
 	}
 	
 	public void accelerate(int speedChange) {

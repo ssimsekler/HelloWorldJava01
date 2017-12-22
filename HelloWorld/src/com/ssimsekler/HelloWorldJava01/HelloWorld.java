@@ -5,6 +5,9 @@ public class HelloWorld {
 
 	public static void main(String[] args) {
 
+		Vehicle veh = new Vehicle("", "", "", true, 2, 100);
+		veh.make = "";
+		
 		SportsCar myPorsche = new SportsCar("My Porsche", "Porsche", "911", 6, 300);
 		
 		myPorsche.changeGear(1);
