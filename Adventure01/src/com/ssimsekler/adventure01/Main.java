@@ -18,19 +18,69 @@ public class Main {
 		locations.put(4, new Location(4, "You are in a valley beside a stream"));
 		locations.put(5, new Location(5, "You are in the forest"));
 
+		locations.get(1).addExit("W", 2);
+		locations.get(1).addExit("E", 3);
+		locations.get(1).addExit("S", 4);
+		locations.get(1).addExit("N", 5);
+
+		locations.get(2).addExit("N", 5);
+
+		locations.get(3).addExit("W", 1);
+
+		locations.get(4).addExit("N", 1);
+		locations.get(4).addExit("W", 2);
+
+		locations.get(5).addExit("S", 1);
+		locations.get(5).addExit("W", 2);
+
+		Map<String, String> vocabulary = new HashMap<>();
+		vocabulary.put("QUIT", "Q");
+		vocabulary.put("NORTH", "N");
+		vocabulary.put("SOUTH", "S");
+		vocabulary.put("WEST", "W");
+		vocabulary.put("EAST", "E");
+
 		int loc = 1;
 		while (true) {
 			System.out.println(locations.get(loc).getDescription());
 			if (loc == 0) {
 				break;
 			}
-			
-			loc = scanner.nextInt();
-			if (!locations.containsKey(loc)) {
-				System.out.println("You cannot go in that direction!");
+
+			Map<String, Integer> exits = locations.get(loc).getExits();
+			System.out.println("Available exits are: ");
+			for (String exit : exits.keySet()) {
+				System.out.print(exit + ", ");
 			}
+			System.out.println();
+
+			String command = scanner.nextLine().toUpperCase();
+
+			if (command.length() >= 1) {
+				String[] words = command.split(" ");
+				for (String word : words) {
+					if (vocabulary.containsKey(word)) {
+						String direction = vocabulary.get(word);
+						if (exits.containsKey(direction)) {
+							loc = exits.get(direction);
+						} else {
+							System.out.println("You cannot go in that direction!");
+						}
+					} else if (vocabulary.containsValue(word)) {
+
+						if (exits.containsKey(word)) {
+							loc = exits.get(word);
+						} else {
+							System.out.println("You cannot go in that direction!");
+						}
+					} else {
+						System.out.println("You cannot go in that direction!");
+					}
+				}
+			}
+
 		}
-		
+
 	}
 
 }
